@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Somos Ayni</title>
+    <style>
+      :root {
+        --bg: #f6f9ff;
+        --text: #111827;
+        --muted: #6b7280;
+        --primary: #2b8ef3;
+        --primary-strong: #1f7fe0;
+        --card: #ffffff;
+        --stroke: #e5e7eb;
+        --shadow: 0 14px 36px rgba(17, 24, 39, 0.12);
+        --radius: 14px;
+        --nav-offset: 84px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji",
+          "Segoe UI Emoji";
+        color: var(--text);
+        background: #ffffff;
+      }
+
+      section[id] {
+        scroll-margin-top: var(--nav-offset);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 48px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #ffffff;
+        border-bottom: 1px solid rgba(229, 231, 235, 0.7);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 16px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #e8f3ff, #cfe7ff);
+        display: grid;
+        place-items: center;
+        color: var(--primary);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 14px;
+        color: #374151;
+      }
+
+      .nav-links a {
+        position: relative;
+        padding: 8px 6px;
+      }
+
+      .nav-links a[aria-current="page"]::after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        right: 6px;
+        bottom: -10px;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--primary);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: 34px;
+        padding: 0 14px;
+        border-radius: 10px;
+        border: 1px solid transparent;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        color: #1f2937;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: #ffffff;
+      }
+
+      .btn-primary:hover {
+        background: var(--primary-strong);
+        border-color: var(--primary-strong);
+      }
+
+      .btn-outline {
+        border-color: #cfe2ff;
+        color: var(--primary);
+        background: #ffffff;
+      }
+
+      .btn-outline:hover {
+        border-color: #b7d6ff;
+        background: #f3f8ff;
+      }
+
+      main {
+        background: linear-gradient(180deg, var(--bg), #ffffff 60%);
+      }
+
+      .hero {
+        padding: 70px 0 34px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(28px, 3.1vw, 40px);
+        letter-spacing: -0.02em;
+      }
+
+      .hero p {
+        margin: 14px auto 0;
+        max-width: 650px;
+        color: var(--muted);
+        line-height: 1.55;
+        font-size: 14.5px;
+      }
+
+      .hero-actions {
+        margin-top: 20px;
+        display: inline-flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-media {
+        margin: 28px auto 0;
+        width: min(820px, 100%);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        background: #111827;
+        border: 1px solid rgba(17, 24, 39, 0.08);
+      }
+
+      .hero-media img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .section {
+        padding: 58px 0 78px;
+        background: #ffffff;
+      }
+
+      .section-muted {
+        padding: 58px 0 78px;
+        background: #f9fbff;
+      }
+
+      .section h2,
+      .section-muted h2 {
+        margin: 0 0 28px;
+        font-size: 22px;
+        letter-spacing: -0.01em;
+        text-align: center;
+      }
+
+      .section-lead {
+        margin: -14px auto 30px;
+        max-width: 720px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 22px;
+      }
+
+      .kpi {
+        background: #ffffff;
+        border: 1px solid rgba(229, 231, 235, 0.9);
+        border-radius: var(--radius);
+        padding: 18px 18px 16px;
+      }
+
+      .kpi strong {
+        display: block;
+        font-size: 22px;
+        letter-spacing: -0.02em;
+      }
+
+      .kpi span {
+        display: block;
+        margin-top: 6px;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .panel {
+        background: #ffffff;
+        border: 1px solid rgba(229, 231, 235, 0.9);
+        border-radius: var(--radius);
+        padding: 20px;
+      }
+
+      .panel h3 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+      }
+
+      .panel p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.65;
+      }
+
+      .bullets {
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+
+      .bullets li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: #374151;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .check {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        border-radius: 6px;
+        background: #eaf3ff;
+        border: 1px solid #d7e9ff;
+        color: var(--primary);
+        display: grid;
+        place-items: center;
+        margin-top: 2px;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .actions-stack {
+        margin-top: 16px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .form {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px 14px;
+      }
+
+      .span-2 {
+        grid-column: 1 / -1;
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+        margin-top: 0;
+      }
+
+      label {
+        font-size: 13px;
+        color: #374151;
+        font-weight: 600;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(229, 231, 235, 0.95);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        background: #ffffff;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #b7d6ff;
+        box-shadow: 0 0 0 4px rgba(43, 142, 243, 0.12);
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid rgba(229, 231, 235, 0.9);
+        border-radius: var(--radius);
+        padding: 20px;
+        min-height: 200px;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+
+      .icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: #eaf3ff;
+        display: grid;
+        place-items: center;
+        border: 1px solid #d7e9ff;
+        color: var(--primary);
+      }
+
+      .card h3 {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .card p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      footer {
+        border-top: 1px solid rgba(229, 231, 235, 0.85);
+        background: #f9fafb;
+      }
+
+      .footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 18px 0;
+        font-size: 12px;
+        color: #6b7280;
+        flex-wrap: wrap;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      @media (max-width: 920px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .steps {
+          grid-template-columns: 1fr;
+        }
+
+        .kpis {
+          grid-template-columns: 1fr;
+        }
+
+        .split {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="nav">
+          <a class="brand" href="#home" aria-label="Somos Ayni">
+            <span class="brand-mark">SA</span>
+            <span>Somos Ayni</span>
+          </a>
+
+          <nav class="nav-links" aria-label="Navegación principal">
+            <a href="#home" aria-current="page">Home</a>
+            <a href="#impacto">Impacto</a>
+            <a href="#empresas">Empresas</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+
+          <div class="nav-actions">
+            <a class="btn btn-primary" href="#">Acceder</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="home" aria-label="Inicio">
+        <div class="container">
+          <h1>Demuestra tu talento resolviendo retos reales</h1>
+          <p>
+            Consigue tu primer empleo formal validando tus habilidades prácticas, sin importar tus años de experiencia.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#como-funciona">Explorar Retos</a>
+            <a class="btn btn-outline" href="#empresas">Soy Empresa</a>
+          </div>
+
+          <div class="hero-media" role="img" aria-label="Personas trabajando en una laptop">
+            <img
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=70"
+              alt="Personas trabajando en equipo"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="como-funciona" aria-labelledby="como-funciona-title">
+        <div class="container">
+          <h2 id="como-funciona-title">Cómo funciona</h2>
+
+          <div class="steps">
+            <article class="card">
+              <div class="card-top">
+                <div class="icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    />
+                    <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <h3>1. Encuentra un reto</h3>
+              </div>
+              <p>
+                Explora problemas reales publicados por empresas que buscan talento fresco e innovador.
+              </p>
+            </article>
+
+            <article class="card">
+              <div class="card-top">
+                <div class="icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M7 17V7a2 2 0 0 1 2-2h6l2 2v10a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                    <path d="M13 5v3a1 1 0 0 0 1 1h3" stroke="currentColor" stroke-width="2" />
+                    <path
+                      d="M9.5 13h5M9.5 16h5"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+                <h3>2. Sube tu solución</h3>
+              </div>
+              <p>
+                Aplica tus conocimientos teóricos para proponer una solución práctica y demuestra lo que sabes hacer.
+              </p>
+            </article>
+
+            <article class="card">
+              <div class="card-top">
+                <div class="icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 2l3 6 6 .8-4.4 4.3 1 6-5.6-3-5.6 3 1-6L3 8.8 9 8l3-6Z"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <h3>3. Obtén tu insignia y conéctate</h3>
+              </div>
+              <p>
+                Recibe feedback, gana insignias verificadas y destaca tu perfil ante reclutadores.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-muted" id="impacto" aria-labelledby="impacto-title">
+        <div class="container">
+          <h2 id="impacto-title">Impacto</h2>
+          <p class="section-lead">
+            Medimos resultados en lo que importa: evidencia, aprendizaje aplicado y conexión con empresas.
+          </p>
+
+          <div class="kpis" role="list">
+            <div class="kpi" role="listitem">
+              <strong>Retos reales</strong>
+              <span>Problemas publicados por empresas para validar habilidades con criterios claros.</span>
+            </div>
+            <div class="kpi" role="listitem">
+              <strong>Aprendizaje aplicado</strong>
+              <span>Portafolio por entregas, listo para entrevistas y procesos de selección.</span>
+            </div>
+            <div class="kpi" role="listitem">
+              <strong>Conexión directa</strong>
+              <span>Feedback e insignias verificadas para destacar ante reclutadores.</span>
+            </div>
+          </div>
+
+          <div class="split">
+            <div class="panel">
+              <h3>Para talento</h3>
+              <p>
+                En vez de “años de experiencia”, priorizamos evidencia. Resuelve retos y muestra proceso, solución e impacto.
+              </p>
+              <ul class="bullets">
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Evidencia de habilidades: código, diseño, análisis o presentación.
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Insignias verificadas para tu CV y perfil profesional.
+                </li>
+              </ul>
+              <div class="actions">
+                <a class="btn btn-primary" href="#como-funciona">Explorar cómo funciona</a>
+                <a class="btn btn-outline" href="#contacto">Hablar con nosotros</a>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Para empresas</h3>
+              <p>
+                Reduce fricción en el reclutamiento: recibe soluciones reales y compara candidatos con el mismo reto.
+              </p>
+              <ul class="bullets">
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Validación práctica con rúbrica y entregables definidos.
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Pipeline de talento con evidencia y comparabilidad.
+                </li>
+              </ul>
+              <div class="actions">
+                <a class="btn btn-primary" href="#contacto">Quiero publicar un reto</a>
+                <a class="btn btn-outline" href="#empresas">Ver propuesta</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="empresas" aria-labelledby="empresas-title">
+        <div class="container">
+          <h2 id="empresas-title">Empresas</h2>
+          <p class="section-lead">
+            Publica un reto, revisa entregas y conoce talento con evidencia. Un flujo simple y comparable.
+          </p>
+
+          <div class="split">
+            <div class="panel">
+              <h3>Publica retos claros</h3>
+              <p>
+                Define el problema, entregables y rúbrica. Recibe soluciones consistentes y fáciles de comparar.
+              </p>
+              <ul class="bullets">
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Rúbrica por competencias (técnicas y blandas).
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Comparación de soluciones con el mismo contexto.
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Señales de calidad: claridad, trade-offs, documentación y entrega.
+                </li>
+              </ul>
+              <div class="actions">
+                <a class="btn btn-primary" href="#contacto">Publicar un reto</a>
+                <a class="btn btn-outline" href="#impacto">Ver impacto</a>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Acceso a perfiles con evidencia</h3>
+              <p>
+                No solo “CV”: revisa decisiones, enfoque y calidad de entrega. Ideal para prácticas, junior y transiciones.
+              </p>
+              <ul class="bullets">
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Evaluación basada en entregables y criterios, no solo entrevistas.
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Comparabilidad entre candidatos con el mismo reto.
+                </li>
+              </ul>
+              <div class="actions-stack">
+                <a class="btn btn-primary" href="#contacto">Hablar con el equipo</a>
+                <a class="btn btn-outline" href="#como-funciona">Ver el flujo</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-muted" id="contacto" aria-labelledby="contacto-title">
+        <div class="container">
+          <h2 id="contacto-title">Contacto</h2>
+          <p class="section-lead">
+            ¿Eres empresa o talento? Escríbenos y te respondemos con los siguientes pasos.
+          </p>
+
+          <div class="contact-grid">
+            <div class="panel">
+              <h3>Envíanos un mensaje</h3>
+              <form class="form">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" />
+                  </div>
+                  <div class="field">
+                    <label for="email">Correo</label>
+                    <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" />
+                  </div>
+                  <div class="field span-2">
+                    <label for="tipo">Soy</label>
+                    <input id="tipo" name="tipo" type="text" placeholder="Talento / Empresa" />
+                  </div>
+                  <div class="field span-2">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas"></textarea>
+                  </div>
+                </div>
+                <div class="actions">
+                  <button class="btn btn-primary" type="button">Enviar</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="panel">
+              <h3>Información</h3>
+              <p>
+                Si estás listo para publicar un reto o quieres conocer el flujo para candidatos, aquí es un buen punto de
+                partida.
+              </p>
+              <ul class="bullets">
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Respuesta en 24–48 horas hábiles.
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Acompañamiento para definir el reto y la rúbrica.
+                </li>
+                <li>
+                  <span class="check" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M20 6 9 17l-5-5"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  Onboarding simple: reto, rúbrica y publicación.
+                </li>
+              </ul>
+              <div class="actions-stack">
+                <a class="btn btn-outline" href="#home">Volver al inicio</a>
+                <a class="btn btn-primary" href="#empresas">Soy empresa</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <strong style="color: #111827">Somos Ayni</strong>
+          <nav class="footer-links" aria-label="Enlaces del pie de página">
+            <a href="#">Privacidad</a>
+            <a href="#">Términos</a>
+            <a href="#">Blog</a>
+            <a href="#">Soporte</a>
+          </nav>
+          <span>© 2026 Somos Ayni. Impulsando el futuro laboral.</span>
+        </div>
+      </div>
+    </footer>
+    <script>
+      (() => {
+        const nav = document.querySelector(".nav-links");
+        if (!nav) return;
+
+        const header = document.querySelector("header");
+        const getHeaderOffset = () => (header ? header.offsetHeight + 12 : 84);
+
+        const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
+        const linkById = new Map(
+          navLinks
+            .map((link) => {
+              const id = (link.getAttribute("href") || "").slice(1);
+              return id ? [id, link] : null;
+            })
+            .filter(Boolean),
+        );
+
+        const normalizeIdForMenu = (id) => (id === "como-funciona" ? "home" : id);
+
+        const setCurrentById = (id) => {
+          const normalizedId = normalizeIdForMenu(id);
+          const link = linkById.get(normalizedId) || linkById.get("home");
+          if (!link) return;
+
+          navLinks.forEach((a) => a.removeAttribute("aria-current"));
+          link.setAttribute("aria-current", "page");
+        };
+
+        const sectionIds = ["home", "como-funciona", "impacto", "empresas", "contacto"];
+        const sections = sectionIds
+          .map((id) => document.getElementById(id))
+          .filter((el) => el && el instanceof HTMLElement);
+
+        const getActiveSectionId = () => {
+          const y = window.scrollY + getHeaderOffset() + 1;
+          let activeId = "home";
+          for (const section of sections) {
+            if (section.offsetTop <= y) activeId = section.id;
+          }
+          return activeId;
+        };
+
+        const setFromHash = () => {
+          const id = (location.hash || "#home").slice(1);
+          setCurrentById(id);
+        };
+
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            setCurrentById(getActiveSectionId());
+            ticking = false;
+          });
+        };
+
+        navLinks.forEach((a) => {
+          a.addEventListener("click", () => {
+            const id = (a.getAttribute("href") || "#home").slice(1);
+            setCurrentById(id);
+          });
+        });
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener(
+          "hashchange",
+          () => {
+            setFromHash();
+            onScroll();
+          },
+          { passive: true },
+        );
+
+        setFromHash();
+        onScroll();
+      })();
+    </script>
+  </body>
+</html>
