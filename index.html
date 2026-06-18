@@ -349,28 +349,39 @@
           <div class="contact-grid">
             <div class="panel">
               <h3>Envíanos un mensaje</h3>
-              <form class="form">
+              <form class="form" id="form-contacto" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                <input type="hidden" name="access_key" value="c1565bb7-8bc7-42c5-a67a-6f715f6fa36c" />
+                <input type="hidden" name="subject" value="Nuevo mensaje desde la landing Somos Ayni" />
+                <input type="hidden" name="from_name" value="Landing Somos Ayni" />
+                <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true" />
+
                 <div class="form-grid">
                   <div class="field">
                     <label for="nombre">Nombre</label>
-                    <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" />
+                    <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Tu nombre" required />
                   </div>
                   <div class="field">
                     <label for="email">Correo</label>
-                    <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" />
+                    <input id="email" name="email" type="email" autocomplete="email" placeholder="tu@correo.com" required />
                   </div>
                   <div class="field span-2">
                     <label for="tipo">Soy</label>
-                    <input id="tipo" name="tipo" type="text" placeholder="Talento / Empresa" />
+                    <select id="tipo" name="tipo" required>
+                      <option value="" disabled selected>Selecciona una opción</option>
+                      <option value="Talento">Talento</option>
+                      <option value="Empresa">Empresa</option>
+                      <option value="Otro">Otro</option>
+                    </select>
                   </div>
                   <div class="field span-2">
                     <label for="mensaje">Mensaje</label>
-                    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas"></textarea>
+                    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos qué necesitas" required minlength="10"></textarea>
                   </div>
                 </div>
                 <div class="actions">
-                  <button class="btn btn-primary" type="button">Enviar</button>
+                  <button class="btn btn-primary" type="submit" id="form-submit">Enviar</button>
                 </div>
+                <p class="form-msg" id="form-msg" role="status" aria-live="polite" hidden></p>
               </form>
             </div>
 
