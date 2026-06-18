@@ -75,3 +75,51 @@
         setFromHash();
         onScroll();
       })();
+
+      (() => {
+        const form = document.getElementById("form-contacto");
+        if (!form) return;
+
+        const btn = document.getElementById("form-submit");
+        const msg = document.getElementById("form-msg");
+
+        const mostrarMensaje = (texto, exito) => {
+          msg.textContent = texto;
+          msg.hidden = false;
+          msg.classList.toggle("form-msg--ok", !!exito);
+          msg.classList.toggle("form-msg--error", !exito);
+        };
+
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          if (!form.reportValidity()) return;
+
+          msg.hidden = true;
+          btn.disabled = true;
+          const textoOriginal = btn.textContent;
+          btn.textContent = "Enviando...";
+
+          try {
+            const datos = new FormData(form);
+            const res = await fetch(form.action, {
+              method: "POST",
+              body: datos,
+              headers: { Accept: "application/json" },
+            });
+            const json = await res.json().catch(() => ({}));
+
+            if (res.ok && json.success) {
+              form.reset();
+              mostrarMensaje("Mensaje enviado. Te contactaremos pronto.", true);
+            } else {
+              const detalle = json.message || "No pudimos enviar tu mensaje. Inténtalo de nuevo.";
+              mostrarMensaje(detalle, false);
+            }
+          } catch (err) {
+            mostrarMensaje("Hubo un problema de conexión. Inténtalo en unos minutos.", false);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = textoOriginal;
+          }
+        });
+      })();
